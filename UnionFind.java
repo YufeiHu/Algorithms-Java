@@ -30,11 +30,11 @@ class UnionFind {
         return root;
     }
     
-    public void union(int i1, int i2) {
+    public boolean union(int i1, int i2) {
         int root1 = find(i1);
         int root2 = find(i2);
         if (root1 == root2)
-            return;
+            return false;
         
         if (this.sizeComponent[root1] < this.sizeComponent[root2]) {
             this.sizeComponent[root2] += this.sizeComponent[root1];
@@ -45,5 +45,6 @@ class UnionFind {
         }
         
         this.numComponents--;
+        return true;
     }
 }
