@@ -30,6 +30,7 @@ class UnionFind {
         return root;
     }
     
+    // return value: true means a union operation happens, false if not
     public boolean union(int i1, int i2) {
         int root1 = find(i1);
         int root2 = find(i2);
