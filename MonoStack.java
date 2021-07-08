@@ -36,6 +36,35 @@ public int[] getPreviousSmallerOrEqualElementIndices(int[] nums) {
     return previousSmallerOrEqualElementIndices;
 }
 
+public int[] getPreviousSmallerOrEqualButClosestElementIndices(int[] nums) {
+    int[] previousSmallerOrEqualButClosestElementIndices = new int[nums.length];
+    Arrays.fill(previousSmallerOrEqualButClosestElementIndices, -1);
+
+    int[][] numsSorted = new int[nums.length][2];
+    for (int i = 0; i < nums.length; i++) {
+        numsSorted[i][0] = nums[i];
+        numsSorted[i][1] = i;
+    }
+
+    Arrays.sort(numsSorted, (e1, e2) -> {
+        if (e1[0] != e2[0])
+            return -(e1[0] - e2[0]);
+        else
+            return e1[1] - e2[1];
+    });
+
+    Stack<Integer> monoDecreaseStack = new Stack<>();
+    for (int i = 0; i < numsSorted.length; i++) {
+        int idx = numsSorted[i][1];
+        while (!monoDecreaseStack.isEmpty() && monoDecreaseStack.peek() < idx) {
+            previousSmallerOrEqualButClosestElementIndices[monoDecreaseStack.pop()] = idx;
+        }
+        monoDecreaseStack.add(idx);
+    }
+
+    return previousSmallerOrEqualButClosestElementIndices;
+}
+
 public int[] getNextSmallerElementIndices(int[] nums) {
     int[] nextSmallerElementIndices = new int[nums.length];
     Stack<Integer> monoIncreaseStack = new Stack<>();
@@ -110,6 +139,35 @@ public int[] getPreviousBiggerOrEqualElementIndices(int[] nums) {
         monoDecreaseStack.add(i);
     }
     return previousBiggerOrEqualElementIndices;
+}
+
+public int[] getPreviousBiggerOrEqualButClosestElementIndices(int[] nums) {
+    int[] previousBiggerOrEqualButClosestElementIndices = new int[nums.length];
+    Arrays.fill(previousBiggerOrEqualButClosestElementIndices, -1);
+
+    int[][] numsSorted = new int[nums.length][2];
+    for (int i = 0; i < nums.length; i++) {
+        numsSorted[i][0] = nums[i];
+        numsSorted[i][1] = i;
+    }
+
+    Arrays.sort(numsSorted, (e1, e2) -> {
+        if (e1[0] != e2[0])
+            return e1[0] - e2[0];
+        else
+            return e1[1] - e2[1];
+    });
+
+    Stack<Integer> monoIncreaseStack = new Stack<>();
+    for (int i = 0; i < numsSorted.length; i++) {
+        int idx = numsSorted[i][1];
+        while (!monoIncreaseStack.isEmpty() && monoIncreaseStack.peek() < idx) {
+            previousBiggerOrEqualButClosestElementIndices[monoIncreaseStack.pop()] = idx;
+        }
+        monoIncreaseStack.add(idx);
+    }
+
+    return previousBiggerOrEqualButClosestElementIndices;
 }
 
 public int[] getNextBiggerElementIndices(int[] nums) {
