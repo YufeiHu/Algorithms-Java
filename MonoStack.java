@@ -1,3 +1,19 @@
+/*
+ * getPreviousSmallerElementIndices
+ * getPreviousSmallerOrEqualElementIndices
+ * getPreviousSmallerOrEqualButClosestElementIndices
+ *
+ * getNextSmallerElementIndices
+ * getNextSmallerOrEqualElementIndices
+ *
+ * getPreviousBiggerElementIndices
+ * getPreviousBiggerOrEqualElementIndices
+ * getPreviousBiggerOrEqualButClosestElementIndices
+ *
+ * getNextBiggerElementIndices
+ * getNextBiggerOrEqualElementIndices
+ */
+
 public int[] getPreviousSmallerElementIndices(int[] nums) {
     int[] previousSmallerElementIndices = new int[nums.length];
     Stack<Integer> monoIncreaseStack = new Stack<>();
