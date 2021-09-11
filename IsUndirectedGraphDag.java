@@ -26,7 +26,7 @@ private boolean dfsIsDag(Map<Integer, List<Integer>> graph, int node, Map<Intege
     return true;
 }
 
-private boolean isDag(Map<Integer, List<Integer>> graph, int numNodes) {
+public boolean isDag(Map<Integer, List<Integer>> graph, int numNodes) {
     Map<Integer, Character> colorMemo = new HashMap<>();
     
     for (int node = 0; node < numNodes; node++) {
