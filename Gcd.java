@@ -1,4 +1,4 @@
-private int getGcd(int a, int b) {
+public int getGcd(int a, int b) {
     while (b > 0) {
         int tmp = a;
         a = b;
