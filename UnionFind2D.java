@@ -31,7 +31,7 @@ class Tuple {
 }
 
 
-class UnionFind2D {
+class UnionFind2d {
     public Map<Tuple, Tuple> parents;
     public Map<Tuple, Integer> sizeComponent;
     public int numIslands;
@@ -39,7 +39,7 @@ class UnionFind2D {
     public int height;
     public int width;
     
-    public UnionFind2D(int height, int width) {
+    public UnionFind2d(int height, int width) {
         this.parents = new HashMap<>();
         this.sizeComponent = new HashMap<>();
         for (int y = 0; y < height; y++) {
