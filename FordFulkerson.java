@@ -31,7 +31,7 @@ private boolean bfs(int residualGraph[][], int start, int end, int[] parents, in
     return false;
 }
 
-private int fordFulkerson(int graph[][], int start, int end, int numVertices) {
+public int fordFulkerson(int graph[][], int start, int end, int numVertices) {
     int currNode;
     int nextNode;
 
