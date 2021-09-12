@@ -1,3 +1,6 @@
+/*
+ * Original array nums is modified.
+ */
 public int[] quickSort(int[] nums) {
     if (nums.length <= 1)
         return nums;
