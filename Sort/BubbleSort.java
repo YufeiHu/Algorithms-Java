@@ -1,3 +1,6 @@
+/*
+ * Original array nums is not modified.
+ */
 public int[] bubbleSort(int[] nums) {
     int numSortSteps = 0;
     int[] ans = nums.clone();
