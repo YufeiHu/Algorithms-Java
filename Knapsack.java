@@ -4,8 +4,10 @@ public int knapsack(int[] weights, int[] values, int capacity) {
     for (int i = 0; i < weights.length; i++) {
         for (int cap = 1; cap <= capacity; cap++) {
             if (weights[i] > cap)
+                // not taking the current item
                 memo[i + 1][cap] = memo[i][cap];
             else
+                // max of (not taking the current item, taking the current item)
                 memo[i + 1][cap] = Math.max(memo[i][cap], values[i] + memo[i][cap - weights[i]]);
         }
     }
