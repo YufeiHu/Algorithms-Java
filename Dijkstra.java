@@ -12,6 +12,7 @@ public double dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start,
     Set<Integer> seen = new HashSet<>();
     double[] minCosts = new double[numNodes];
     Arrays.fill(minCosts, Double.POSITIVE_INFINITY);
+    minCosts[start] = 0;
     Integer[] previousNode = new Integer[numNodes];
 
     while (!pq.isEmpty()) {
