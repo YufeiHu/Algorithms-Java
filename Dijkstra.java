@@ -1,4 +1,4 @@
-public int dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start, int end) {
+public double dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start, int end) {
     PriorityQueue<Entry> pq = new PriorityQueue<Entry>((e1, e2) -> {
         if (e1.cost > e2.cost)
             return 1;
