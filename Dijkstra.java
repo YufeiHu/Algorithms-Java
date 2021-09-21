@@ -1,23 +1,5 @@
-public int dijkstra(int[][] edges, double[] costs, int start, int end) {
-    // build the graph
-    Map<Integer, List<Tuple>> graph = new HashMap<>();
-    for (int i = 0; i < edges.length; i++) {
-        int[] edge = edges[i];
-        int v1 = edge[0];
-        int v2 = edge[1];
-        double cost = costs[i];
-
-        if (!graph.containsKey(v1))
-            graph.put(v1, new ArrayList<>());
-        graph.get(v1).add(new Tuple(cost, v2));
-
-        if (!graph.containsKey(v2))
-            graph.put(v2, new ArrayList<>());
-        graph.get(v2).add(new Tuple(cost, v1));
-    }
-    
-    // run the dijkstra algorithm
-    PriorityQueue<Tuple> pq = new PriorityQueue<Tuple>((e1, e2) -> {
+public int dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start, int end) {
+    PriorityQueue<Entry> pq = new PriorityQueue<Entry>((e1, e2) -> {
         if (e1.cost > e2.cost)
             return 1;
         else if (e1.cost < e2.cost)
@@ -25,23 +7,32 @@ public int dijkstra(int[][] edges, double[] costs, int start, int end) {
         else
             return 0;
     });
-    pq.add(new Tuple(0, start));
+    pq.add(new Entry(start, 0));
+    
     Set<Integer> seen = new HashSet<>();
+    double[] minCosts = new double[numNodes];
+    Arrays.fill(minCosts, Double.POSITIVE_INFINITY);
+    Integer[] previousNode = new Integer[numNodes];
 
     while (!pq.isEmpty()) {
-        Tuple entry = pq.poll();
-        double costTotal = entry.cost;
-        int v1 = entry.v;
-
+        Entry entry = pq.poll();
+        int v1 = entry.vertex;
+        double currCost = entry.cost;
+        
         if (!seen.contains(v1)) {
             seen.add(v1);
             if (v1 == end)
-                return costTotal;
+                return currCost;
 
             if (graph.containsKey(v1)) {
-                for (Tuple entryNeighbor : graph.get(v1)) {
-                    double costNext = costTotal + entryNeighbor.cost;
-                    pq.add(new Tuple(costNext, entryNeighbor.v));
+                for (Entry neighbor : graph.get(v1)) {
+                    int v2 = neighbor.vertex;
+                    double nextCost = currCost + neighbor.cost;
+                    if (nextCost < minCosts[v2]) {
+                        minCosts[v2] = nextCost;
+                        previousNode[v2] = v1;
+                        pq.add(new Entry(v2, nextCost));
+                    }
                 }
             }
         }
@@ -50,17 +41,17 @@ public int dijkstra(int[][] edges, double[] costs, int start, int end) {
     return Double.POSITIVE_INFINITY;
 }
 
-class Tuple {
+class Entry {
+    public int vertex;
     public double cost;
-    public int v;
     
-    public Tuple(double cost, int v) {
+    public Entry(int vertex, double cost) {
+        this.vertex = vertex;
         this.cost = cost;
-        this.v = v;
     }
     
     @Override
     public String toString() {
-        return String.format("(cost=%f, v=%d)", cost, v);
+        return String.format("(vertex=%d, cost=%f)", this.vertex, this.cost);
     }
 }
