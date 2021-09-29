@@ -1,3 +1,8 @@
+/*
+ * Time complexity: 𝑂((𝑚+𝑛)log(𝑛))
+ * m: number of operations
+ * n: number of elements
+ */
 class UnionFind {
     public int[] parents;
     public int[] sizeComponent;
