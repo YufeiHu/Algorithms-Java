@@ -19,8 +19,7 @@ class WordDictionary {
         TrieNode node = this.trie;
         for (int i = 0; i < word.length(); i++) {
             Character c = word.charAt(i);
-            if (!node.children.containsKey(c))
-                node.children.put(c, new TrieNode());
+            node.children.putIfAbsent(c, new TrieNode());
             node = node.children.get(c);
         }
         node.isEnd = true;
