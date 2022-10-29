@@ -39,7 +39,6 @@ class WordDictionary {
     }
     
     public boolean search(String word) {
-        TrieNode node = this.trie;
-        return searchHelp(word, 0, node);
+        return searchHelp(word, 0, this.trie);
     }
 }
