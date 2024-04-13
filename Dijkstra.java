@@ -8,32 +8,37 @@ public double dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start,
             return 0;
     });
     pq.add(new Entry(start, 0));
-    
+
     Set<Integer> seen = new HashSet<>();
+    Integer[] previousNode = new Integer[numNodes];
+
     double[] minCosts = new double[numNodes];
     Arrays.fill(minCosts, Double.POSITIVE_INFINITY);
     minCosts[start] = 0;
-    Integer[] previousNode = new Integer[numNodes];
 
     while (!pq.isEmpty()) {
         Entry entry = pq.poll();
         int v1 = entry.vertex;
         double currCost = entry.cost;
-        
-        if (!seen.contains(v1)) {
-            seen.add(v1);
-            if (v1 == end)
-                return currCost;
 
-            if (graph.containsKey(v1)) {
-                for (Entry neighbor : graph.get(v1)) {
-                    int v2 = neighbor.vertex;
-                    double nextCost = currCost + neighbor.cost;
-                    if (nextCost < minCosts[v2]) {
-                        minCosts[v2] = nextCost;
-                        previousNode[v2] = v1;
-                        pq.add(new Entry(v2, nextCost));
-                    }
+        if (seen.contains(v1)) {
+            continue;
+        }
+
+        seen.add(v1);
+        
+        if (v1 == end) {
+            return currCost;
+        }
+
+        if (graph.containsKey(v1)) {
+            for (Entry neighbor : graph.get(v1)) {
+                int v2 = neighbor.vertex;
+                double nextCost = currCost + neighbor.cost;
+                if (nextCost < minCosts[v2]) {
+                    minCosts[v2] = nextCost;
+                    previousNode[v2] = v1;
+                    pq.add(new Entry(v2, nextCost));
                 }
             }
         }
