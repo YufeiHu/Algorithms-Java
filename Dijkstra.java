@@ -1,17 +1,11 @@
 public double dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start, int end) {
     PriorityQueue<Entry> pq = new PriorityQueue<Entry>((e1, e2) -> {
-        if (e1.cost > e2.cost)
-            return 1;
-        else if (e1.cost < e2.cost)
-            return -1;
-        else
-            return 0;
+        return e1.cost - e2.cost;
     });
     pq.add(new Entry(start, 0));
 
     Set<Integer> seen = new HashSet<>();
     Integer[] previousNode = new Integer[numNodes];
-
     double[] minCosts = new double[numNodes];
     Arrays.fill(minCosts, Double.POSITIVE_INFINITY);
     minCosts[start] = 0;
@@ -24,7 +18,6 @@ public double dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start,
         if (seen.contains(v1)) {
             continue;
         }
-
         seen.add(v1);
         
         if (v1 == end) {
