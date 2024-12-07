@@ -1,5 +1,5 @@
 public double dijkstra(int numNodes, Map<Integer, List<Entry>> graph, int start, int end) {
-    PriorityQueue<Entry> pq = new PriorityQueue<Entry>((e1, e2) -> {
+    PriorityQueue<Entry> pq = new PriorityQueue<>((e1, e2) -> {
         return e1.cost - e2.cost;
     });
     pq.add(new Entry(start, 0));
